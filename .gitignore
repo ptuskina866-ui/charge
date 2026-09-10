@@ -1,0 +1,5 @@
+*.tar.gz
+*.tar
+video-frame-*.jpg
+manrope.ttf
+__pycache__/
