@@ -3,3 +3,6 @@
 video-frame-*.jpg
 manrope.ttf
 __pycache__/
+qa-*.png
+.playwright-mcp/
+.sites-runtime/

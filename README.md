@@ -22,7 +22,11 @@ Type 2, up to 3.5 kW, 220 V single phase, 8/10/13/16 A, LCD, delayed start, appr
 
 `python finalize_site.py` updates the Product/Offer and FAQ schema from the visible FAQ. `python validate_site.py` checks image sizing/alt, local resources, anchors, unique IDs, one H1, prices and JSON-LD. `node --check dist/app.js` checks script syntax.
 
-No Lighthouse scores or browser QA have been claimed. Responsive breakpoints cover 360, 390, 768, 1024 and large desktop widths. Reduced motion, keyboard-friendly native dialogs and accordions, reserved image sizes, local variable font and a lazy user-initiated muted video are implemented.
+The September 11 revision was checked in Chromium at 360, 390, 768, 1024 and 1440 px with no horizontal overflow. Current selection, form opening, FAQ, video pause/resume and offscreen pause passed. Reduced motion keeps the poster without requesting video. No Lighthouse scores have been claimed.
+
+The latest September 11 revision removes all video from the page and uses a static display photograph with four parameter rows. The current selector's photo remains hidden below 768 px. New supplied photographs illustrate connection, the quiet charging section and compatibility. The connection photograph extends to the right viewport edge; the four headline specifications are centered. Compatibility uses a large photograph on the left, copy on the right and brand examples underneath. FAQ shares the specifications' full-width heading and two-column desktop structure; both become one column on mobile.
+
+Removed the hero eyebrow, hero trust line and bottom caption, scenario carousel, delayed-start promotional note, old product-film control, repeated dark offer block, current-photo caption and kit section. Delayed start remains in the confirmed specifications and FAQ. Price remains 350 BYN and lead submission remains disconnected. Latest layout and interactions checked in an isolated Chromium context at 360, 390, 768, 1024, 1440 and 1920 CSS pixels.
 
 Optional WebMCP tools share the visible current selector and form opener, without submitting data. No supported WebMCP validation context was available; these optional registrations have not been runtime-verified.
 

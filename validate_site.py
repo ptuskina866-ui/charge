@@ -11,7 +11,7 @@ class Validator(HTMLParser):
   for k in ['href','src','data-src','poster']:
    if a.get(k,'').startswith('/') and not a[k].startswith('//'):self.refs.append(a[k])
    if k=='href' and a.get(k,'').startswith('#') and len(a[k])>1:self.anchors.append(a[k][1:])
-  if 'srcset' in a:self.refs.extend(x.strip().split(' ')[0] for x in a['srcset'].split(','))
+  if 'srcset' in a and not a['srcset'].startswith('data:'):self.refs.extend(x.strip().split(' ')[0] for x in a['srcset'].split(','))
   if t=='img':
    self.images+=1
    for k in ['alt','width','height']:
@@ -26,7 +26,7 @@ for css in root.glob('*.css'):
  for ref in re.findall(r'url\([\'\"]?([^\)\'\"]+)',css.read_text()):
   if ref.startswith('/'):assert (root/ref.lstrip('/')).exists(),f'Missing {ref}'
 for block in re.findall(r'<script type="application/ld\+json"[^>]*>(.*?)</script>',s,re.S):json.loads(block)
-assert s.count('350 BYN')==4,'Price must be consistent in all four places'
+assert s.count('350 BYN')==3,'Price must be consistent in all three places'
 assert '[ЦЕНА]' not in s,'Unreplaced price'
 print(f'PASS: one H1, {v.images} labelled/sized images, {len(set(v.refs))} local assets, {len(v.anchors)} anchors, JSON-LD, consistent price.')
 print('Public payload total:',sum(p.stat().st_size for p in root.rglob('*') if p.is_file()),'bytes')

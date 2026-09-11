@@ -16,14 +16,6 @@ $$('[data-current]').forEach(button => button.addEventListener('click', () => {
  $('#power-fill').style.width = `${Number(button.dataset.current) / 16 * 100}%`;
 }));
 
-const track = $('#scenario-track');
-function scrollScenario(direction) { const step = $('.scenario', track).getBoundingClientRect().width + 24; track.scrollBy({left: direction * step, behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}); }
-$('#prev-scenario').addEventListener('click', () => scrollScenario(-1));
-$('#next-scenario').addEventListener('click', () => scrollScenario(1));
-track.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); scrollScenario(e.key === 'ArrowRight' ? 1 : -1); } });
-function updateCarousel() { $('#prev-scenario').disabled = track.scrollLeft < 5; $('#next-scenario').disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 5; }
-track.addEventListener('scroll', updateCarousel, {passive:true});window.addEventListener('resize', updateCarousel);updateCarousel();
-
 const leadDialog = $('#lead-dialog');
 const legalDialog = $('#legal-dialog');
 let returnFocus = null;
@@ -58,10 +50,9 @@ form.addEventListener('submit', async e => {
 const sticky = $('#sticky-order');
 new IntersectionObserver(([entry]) => {const show=!entry.isIntersecting && entry.boundingClientRect.bottom<0;sticky.classList.toggle('is-visible',show);sticky.inert=!show;},{threshold:0}).observe($('#hero'));
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-revealed');observer.unobserve(entry.target);}}),{threshold:.08});$$('.reveal').forEach(element=>{element.classList.add('will-reveal');observer.observe(element);}); }
-const video=$('#product-video');
-$('#play-film').addEventListener('click',async()=>{const container=$('#film-container');const opening=container.hidden;container.hidden=!opening;$('#play-film').innerHTML=opening?'Закрыть видео <span aria-hidden="true">×</span>':'Смотреть видео <span aria-hidden="true">▷</span>';if(opening){if(!video.src)video.src=video.dataset.src;try{await video.play();}catch{video.controls=true;}}else video.pause();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();});
 $('#year').textContent = new Date().getFullYear();
+
+const brandMarquee = $('.brand-marquee');
 
 // Optional agent access to the same on-page controls. Does not submit contact data.
 if (document.modelContext?.registerTool) {
