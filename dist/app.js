@@ -10,10 +10,20 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu();
 document.addEventListener('click', e => { if (!e.target.closest('.header')) closeMenu(); });
 
 const powerValues = {8:'1,8',10:'2,2',13:'2,9',16:'3,5'};
+const currentImages = {8:'/assets/current-8.webp',10:'/assets/current-10.webp',13:'/assets/current-13.webp',16:'/assets/current-macro-1200.webp'};
 $$('[data-current]').forEach(button => button.addEventListener('click', () => {
+ const amps = button.dataset.current;
  $$('[data-current]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
- $('#power-output').innerHTML = `≈ ${powerValues[button.dataset.current]} <small>кВт</small>`;
- $('#power-fill').style.width = `${Number(button.dataset.current) / 16 * 100}%`;
+ const output = $('#power-output');
+ output.innerHTML = `≈ ${powerValues[amps]} <small>кВт</small>`;
+ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  output.animate([{opacity:.65,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,easing:'ease-out'});
+ }
+ $('#power-fill').style.width = `${Number(amps) / 16 * 100}%`;
+ const image = $('#current-image');
+ image.src = currentImages[amps];
+ image.alt = `Дисплей зарядного устройства Teschev: ${amps} А, ${powerValues[amps]} кВт`;
+ $('#current-image-source').srcset = amps === '16' ? '/assets/current-macro-800.webp 800w, /assets/current-macro-1200.webp 838w' : currentImages[amps];
 }));
 
 const leadDialog = $('#lead-dialog');

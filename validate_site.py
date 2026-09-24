@@ -21,7 +21,7 @@ assert v.h1==1, f'H1 count {v.h1}'
 assert len(v.ids)==len(set(v.ids)), 'Duplicate IDs'
 assert not v.errors,v.errors
 assert not(set(v.anchors)-set(v.ids)), 'Broken anchors'
-for ref in v.refs:assert (root/ref.lstrip('/')).is_file(),f'Missing {ref}'
+for ref in v.refs:assert (root/ref.split('?',1)[0].lstrip('/')).is_file(),f'Missing {ref}'
 for css in root.glob('*.css'):
  for ref in re.findall(r'url\([\'\"]?([^\)\'\"]+)',css.read_text()):
   if ref.startswith('/'):assert (root/ref.lstrip('/')).exists(),f'Missing {ref}'

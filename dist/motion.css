@@ -1,0 +1,21 @@
+/* Quiet motion that supports the product story without shifting its layout. */
+.reveal-text.will-reveal,
+.reveal-photo.will-reveal {
+  transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1);
+}
+.reveal-text.will-reveal:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.reveal-photo.will-reveal:not(.is-revealed) {
+  opacity: 0;
+  transform: none;
+}
+.marquee-track { animation-duration: 60s; }
+.brand-marquee:hover .marquee-track,
+.brand-marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-text.will-reveal,
+  .reveal-photo.will-reveal { opacity: 1; transform: none; }
+}
