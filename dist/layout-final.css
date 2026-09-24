@@ -83,3 +83,5 @@
 .marquee-group{min-width:100vw;justify-content:space-around}
 @media(min-width:768px){.simple .wide-photo,.display-still,.compat-visual{position:relative}.simple .wide-photo img,.display-still img,.compat-visual img{position:absolute;inset:0;width:100%;height:100%}}
 @media(prefers-reduced-motion:reduce){.marquee-group{min-width:0;justify-content:center}}
+.arrow-icon{display:inline-block;flex:0 0 17px;width:17px;height:17px;background-color:currentColor;-webkit-mask:url('/assets/arrow-up-right.svg') center/contain no-repeat;mask:url('/assets/arrow-up-right.svg') center/contain no-repeat}
+.button-small .arrow-icon,.text-button .arrow-icon{flex-basis:15px;width:15px;height:15px}
